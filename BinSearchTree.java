@@ -77,6 +77,8 @@ public class BinSearchTree<E extends Comparable<E>>
     };
     return it;
   }
+  
+  public int test = 1;
 
   /** main() -- a simple test */
   public static void main(String[] args) {
