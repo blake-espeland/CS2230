@@ -77,10 +77,6 @@ public class BinSearchTree<E extends Comparable<E>>
     };
     return it;
   }
-  
-  public void foo() {
-	  System.out.println("foobar");
-  }
 
   /** main() -- a simple test */
   public static void main(String[] args) {
