@@ -1,3 +1,4 @@
+package binarySearchTree;
 import java.util.Iterator;
 import java.lang.Object;
 
@@ -5,14 +6,14 @@ public class BinTreeNode<E> implements BinTreePos<E> {
 	private E elt;
 	private BinTreePos<E> parent;
 	private BinTreePos<E> left, right;
+	public BinTreeNode() {}
 	public BinTreeNode(E e, BinTreePos<E> par,
-	 			BinTreePos<E> lt, BinTreePos<E> rt) {
-		elt = e;
-		parent = par;
-		left = lt;
-		right = rt;
+ 			BinTreePos<E> lt, BinTreePos<E> rt) {
+	elt = e;
+	parent = par;
+	left = lt;
+	right = rt;
 	}
-
 	/** Parent of current node */
 	public BinTreePos<E> parent() { return parent; }
 	/** Left child */

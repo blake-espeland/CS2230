@@ -1,3 +1,4 @@
+package binarySearchTree;
 import java.util.*;
 
 public interface BinTreePos<E> {

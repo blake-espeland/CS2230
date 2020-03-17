@@ -1,23 +1,65 @@
+package binarySearchTree;
 import java.lang.Comparable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class BinSearchTree<E extends Comparable<E>>
           extends BinTree<E> implements Iterable<E> {
-
   /** findPos returns position where node with element e,
       or the position where node for e should be inserted,
       Returns null for an empty tree */
   protected BinTreePos<E> findPos(E e) {
-    if ( isEmpty() )
-      return null;
-    BinTreePos<E> lt, rt, pos = root();
-    // Put code here to determine position containing e, or the
-    // position where a node for e should be inserted.
-
-    return pos;
+    if ( isEmpty() ) { 
+    	return null;
+    }
+    
+    BinTreePos<E> lt, rt, pos;
+    pos = root();  //correct position
+    lt = pos.left();  //left pointer
+    rt = pos.right();  //right pointer
+    BinTreeNode<E> cur = new BinTreeNode<E>(pos.element(), pos, lt, rt);  //Traversal Node
+	
+    //Traverses tree and returns position for where e should go
+    while(true) {
+    	
+    	int comp = e.compareTo(cur.element());
+    	
+    	//Less than
+    	if (comp < 0) {
+    		if (cur.left() == null) {
+    			return pos;
+    		}else {
+	    		pos = pos.left();
+	    		pos.setParent(cur.parent());
+	    		lt = pos.left();
+	    		pos.setLeft(lt);
+	    		rt = pos.right();
+	    		pos.setRight(rt);
+	    		cur = new BinTreeNode<E>(pos.element(), pos, lt, rt);
+	    		continue;
+    		}
+    	}
+    	//Greater Than
+		if (comp > 0) {
+    		if (cur.right() == null) {
+    			return pos;
+    		}else {
+	    		pos = pos.right();
+	    		pos.setParent(cur.parent());
+	    		rt = pos.right();
+	    		pos.setRight(rt);
+	    		lt = pos.left();
+	    		pos.setLeft(lt);
+	    		cur = new BinTreeNode<E>(pos.element(), pos, lt, rt);
+				continue;
+    		}
+		//equal
+		}
+		return pos;
+    }
   }
-
+    
+  
   /** add inserts a node with entry e
       provided e is not already in the tree*/
   public void add(E e) {
@@ -41,7 +83,7 @@ public class BinSearchTree<E extends Comparable<E>>
     Iterator<E> it = new Iterator<E>() {
       private BinTreePos<E> pos = root();
       private boolean atStart = true;
-
+  
       public boolean hasNext() {
         return pos != null;
       }
@@ -77,9 +119,11 @@ public class BinSearchTree<E extends Comparable<E>>
     };
     return it;
   }
+  
 
   /** main() -- a simple test */
   public static void main(String[] args) {
+	
     BinSearchTree<String> bst = new BinSearchTree<String>();
     String[] words = { "grape", "cranberry", "kumkwat", "vanilla",
               "apple", "walnut", "elderberry", "blackberry" };
@@ -94,5 +138,6 @@ public class BinSearchTree<E extends Comparable<E>>
     for ( String w : bst )
       System.out.print(w + ", ");
     System.out.println("That's all folks!");
+    bst.findPos("apple");
   }
 }
