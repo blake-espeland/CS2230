@@ -1,4 +1,3 @@
-package binarySearchTree;
 import java.lang.Comparable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
